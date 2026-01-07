@@ -1,4 +1,9 @@
 ui <- shiny::fluidPage(
+  shiny::tags$head(
+    shiny::includeCSS(
+      here::here("www", "dark_mode.css")
+    )
+  ),
   shiny::titlePanel(
     "TU Run Club 2026 - Sale to Gothenburg"
   ),
