@@ -2,6 +2,7 @@ required_packages <- c(
   "dplyr",
   "here",
   "leaflet",
+  "plotly",
   "purrr",
   "readr",
   "readxl",

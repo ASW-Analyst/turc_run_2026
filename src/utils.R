@@ -124,3 +124,31 @@ build_route_segments <- function(route, covered_km) {
     remaining = remaining
   )
 }
+
+build_runner_totals <- function(runs) {
+  excluded <- c(
+    "Date",
+    "Distance",
+    "runner_count",
+    "run_total_km",
+    "cumulative_km"
+  )
+  participant_columns <- setdiff(names(runs), excluded)
+
+  runs |>
+    tidyr::pivot_longer(
+      cols = dplyr::all_of(participant_columns),
+      names_to = "runner",
+      values_to = "ran"
+    ) |>
+    dplyr::mutate(
+      ran = as.numeric(.data$ran),
+      distance = .data$Distance
+    ) |>
+    dplyr::group_by(.data$runner) |>
+    dplyr::summarise(
+      cumulative_km = sum(.data$ran * .data$distance, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
+    dplyr::arrange(dplyr::desc(.data$cumulative_km))
+}

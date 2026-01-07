@@ -18,6 +18,11 @@
       "Version": "2.2.2",
       "Source": "CRAN"
     },
+    "plotly": {
+      "Package": "plotly",
+      "Version": "4.10.4",
+      "Source": "CRAN"
+    },
     "purrr": {
       "Package": "purrr",
       "Version": "1.0.2",

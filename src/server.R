@@ -57,6 +57,44 @@ server <- function(input, output, session) {
     )
   })
 
+  output$runner_plot <- plotly::renderPlotly({
+    runs <- runs_data()
+    totals <- build_runner_totals(runs)
+
+    if (nrow(totals) == 0) {
+      return(NULL)
+    }
+
+    plotly::plot_ly(
+      data = totals,
+      x = ~cumulative_km,
+      y = ~runner,
+      type = "bar",
+      orientation = "h",
+      marker = list(color = "#2ca25f"),
+      hovertemplate = "%{y}<br>%{x:.1f} km<extra></extra>"
+    ) |>
+      plotly::layout(
+        title = "TURC Contributions",
+        paper_bgcolor = "#0f1216",
+        plot_bgcolor = "#0f1216",
+        font = list(color = "#e6e9ee"),
+        xaxis = list(
+          title = "Cumulative distance (km)",
+          color = "#e6e9ee",
+          gridcolor = "#2a313a",
+          zerolinecolor = "#2a313a"
+        ),
+        yaxis = list(
+          title = "",
+          color = "#e6e9ee",
+          categoryorder = "array",
+          categoryarray = totals$runner
+        ),
+        margin = list(l = 120, r = 20, t = 50, b = 50)
+      )
+  })
+
   output$route_map <- leaflet::renderLeaflet({
     runs <- runs_data()
     markers <- build_run_markers(runs, route)
