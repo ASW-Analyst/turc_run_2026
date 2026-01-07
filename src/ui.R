@@ -6,10 +6,6 @@ ui <- shiny::fluidPage(
     shiny::sidebarPanel(
       shiny::helpText(
         "Using data/turc_2026.xlsx"
-      ),
-      shiny::helpText(
-        "Expected columns: Date, Distance, and participant",
-        " columns with 1/0 values."
       )
     ),
     shiny::mainPanel(
