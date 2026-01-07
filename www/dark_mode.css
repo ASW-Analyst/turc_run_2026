@@ -44,11 +44,19 @@ body {
 .title-panel,
 .title,
 h1, h2, h3, h4 {
-  color: var(--text);
+  color: #2da674;
 }
 
 .title-panel h2 {
-  color: var(--text);
+  color: #2da674;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background-color: #2da674;
+  box-shadow: 0 0 8px rgba(45, 166, 116, 0.6);
+  margin: 16px 0;
 }
 
 .sidebar {
@@ -114,6 +122,33 @@ label, .control-label {
   background-color: var(--panel);
   color: var(--text);
   border-color: var(--panel-border);
+}
+
+.nav-tabs {
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.nav-tabs > li > a {
+  color: var(--muted);
+  background-color: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-bottom-color: transparent;
+  margin-right: 4px;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  color: var(--text);
+  background-color: #1b222b;
+  border-color: var(--panel-border);
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #ffffff;
+  background-color: #2da674;
+  border-color: #2da674;
 }
 
 pre, code, .shiny-text-output, .shiny-output-error {
