@@ -10,7 +10,8 @@ ui <- shiny::fluidPage(
     ),
     shiny::mainPanel(
       leaflet::leafletOutput("route_map", height = 600),
-      shiny::verbatimTextOutput("summary_text")
+      shiny::verbatimTextOutput("summary_text"),
+      shiny::verbatimTextOutput("remaining_text")
     )
   )
 )

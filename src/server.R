@@ -41,16 +41,45 @@ server <- function(input, output, session) {
     )
   })
 
+  output$remaining_text <- shiny::renderText({
+    runs <- runs_data()
+
+    total_km <- max(route$distance_km, na.rm = TRUE)
+    covered_km <- if (nrow(runs) == 0) 0 else {
+      max(runs$cumulative_km, na.rm = TRUE)
+    }
+    remaining_km <- max(total_km - covered_km, 0)
+
+    paste0(
+      "Remaining distance: ",
+      round(remaining_km, 1),
+      " km"
+    )
+  })
+
   output$route_map <- leaflet::renderLeaflet({
     runs <- runs_data()
     markers <- build_run_markers(runs, route)
+    covered_km <- if (nrow(runs) == 0) 0 else {
+      max(runs$cumulative_km, na.rm = TRUE)
+    }
+    segments <- build_route_segments(route, covered_km)
 
     leaflet::leaflet(route) |>
       leaflet::addProviderTiles("CartoDB.Positron") |>
       leaflet::addPolylines(
+        data = segments$remaining,
         lng = ~lon,
         lat = ~lat,
-        color = "#2c7fb8",
+        color = "#a6bddb",
+        weight = 3,
+        opacity = 0.7
+      ) |>
+      leaflet::addPolylines(
+        data = segments$covered,
+        lng = ~lon,
+        lat = ~lat,
+        color = "#2ca25f",
         weight = 3,
         opacity = 0.8
       ) |>

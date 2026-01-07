@@ -100,3 +100,27 @@ build_run_markers <- function(runs, route) {
       cumulative_km = runs$cumulative_km
     )
 }
+
+build_route_segments <- function(route, covered_km) {
+  max_km <- max(route$distance_km, na.rm = TRUE)
+  clipped_km <- min(max(covered_km, 0), max_km)
+
+  cut_point <- interpolate_route_point(route, clipped_km)
+
+  covered <- route |>
+    dplyr::filter(.data$distance_km <= clipped_km) |>
+    dplyr::bind_rows(cut_point) |>
+    dplyr::distinct(.data$distance_km, .keep_all = TRUE) |>
+    dplyr::arrange(.data$distance_km)
+
+  remaining <- route |>
+    dplyr::filter(.data$distance_km >= clipped_km) |>
+    dplyr::bind_rows(cut_point) |>
+    dplyr::distinct(.data$distance_km, .keep_all = TRUE) |>
+    dplyr::arrange(.data$distance_km)
+
+  list(
+    covered = covered,
+    remaining = remaining
+  )
+}
