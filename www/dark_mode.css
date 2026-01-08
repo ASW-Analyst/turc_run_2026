@@ -1,0 +1,164 @@
+:root {
+  --bg: #0f1216;
+  --panel: #151a20;
+  --panel-border: #2a313a;
+  --text: #e6e9ee;
+  --muted: #a6b0bf;
+  --accent: #48d1b5;
+  --accent-strong: #2fb79d;
+  --danger: #ff6b6b;
+  --shadow: rgba(0, 0, 0, 0.35);
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: "Alegreya Sans", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.container-fluid {
+  padding-top: 12px;
+  background-color: var(--bg);
+}
+
+.navbar,
+.navbar-default {
+  background-color: var(--panel);
+  border-color: var(--panel-border);
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color: var(--text);
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-brand:hover {
+  color: var(--accent);
+}
+
+.title-panel,
+.title,
+h1, h2, h3, h4 {
+  color: #2da674;
+}
+
+.title-panel h2 {
+  color: #2da674;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background-color: #2da674;
+  box-shadow: 0 0 8px rgba(45, 166, 116, 0.6);
+  margin: 16px 0;
+}
+
+.sidebar {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px var(--shadow);
+  padding: 12px;
+}
+
+.well {
+  background-color: var(--panel);
+  border-color: var(--panel-border);
+}
+
+label, .control-label {
+  color: var(--muted);
+}
+
+.help-block, .help-text {
+  color: var(--muted);
+}
+
+.form-control {
+  background-color: #10151b;
+  color: var(--text);
+  border-color: var(--panel-border);
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(72, 209, 181, 0.15);
+}
+
+.btn, .btn-default {
+  background-color: var(--panel);
+  color: var(--text);
+  border-color: var(--panel-border);
+}
+
+.btn:hover, .btn-default:hover {
+  background-color: #1b222b;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.leaflet-container {
+  background: #0b0f14;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px var(--shadow);
+}
+
+.leaflet-tooltip,
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background-color: var(--panel);
+  color: var(--text);
+  border-color: var(--panel-border);
+}
+
+.leaflet-control-zoom a {
+  background-color: var(--panel);
+  color: var(--text);
+  border-color: var(--panel-border);
+}
+
+.nav-tabs {
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.nav-tabs > li > a {
+  color: var(--muted);
+  background-color: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-bottom-color: transparent;
+  margin-right: 4px;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  color: var(--text);
+  background-color: #1b222b;
+  border-color: var(--panel-border);
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #ffffff;
+  background-color: #2da674;
+  border-color: #2da674;
+}
+
+pre, code, .shiny-text-output, .shiny-output-error {
+  background-color: #0f141a;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.shiny-output-error-validation {
+  color: var(--danger);
+}
