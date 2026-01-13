@@ -1,0 +1,38 @@
+name: Deploy Shiny App
+
+on:
+  push:
+    paths:
+      - "data/turc_2026.xlsx"
+      - "renv.lock"
+      - "src/**"
+      - "app.R"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      RSCONNECT_USER: ${{ secrets.RSCONNECT_USER }}
+      RSCONNECT_TOKEN: ${{ secrets.RSCONNECT_TOKEN }}
+      RSCONNECT_SECRET: ${{ secrets.RSCONNECT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - uses: r-lib/actions/setup-renv@v2
+
+      - name: Deploy to shinyapps.io
+        run: |
+          Rscript - <<'RS'
+          rsconnect::setAccountInfo(
+            name = Sys.getenv("RSCONNECT_USER"),
+            token = Sys.getenv("RSCONNECT_TOKEN"),
+            secret = Sys.getenv("RSCONNECT_SECRET")
+          )
+          rsconnect::deployApp(
+            appDir = ".",
+            appName = "turc_run_2026"
+          )
+          RS
