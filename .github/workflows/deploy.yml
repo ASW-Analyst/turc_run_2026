@@ -16,7 +16,7 @@ jobs:
       RSCONNECT_USER: ${{ secrets.RSCONNECT_USER }}
       RSCONNECT_TOKEN: ${{ secrets.RSCONNECT_TOKEN }}
       RSCONNECT_SECRET: ${{ secrets.RSCONNECT_SECRET }}
-      RENV_CONFIG_REPOS_OVERRIDE: >
+      RENV_CONFIG_REPOS_OVERRIDE: >-
         https://packagemanager.posit.co/cran/__linux__/jammy/latest
     steps:
       - uses: actions/checkout@v4
