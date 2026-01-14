@@ -53,6 +53,7 @@ jobs:
           )
           rsconnect::deployApp(
             appDir = ".",
-            appName = "turc_run_2026"
+            appName = "turc_run_2026",
+            forceUpdate = TRUE
           )
           RS
