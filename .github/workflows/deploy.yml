@@ -5,6 +5,7 @@ on:
     paths:
       - "data/turc_2026.xlsx"
       - "renv.lock"
+      - ".github/workflows/deploy.yml"
       - "src/**"
       - "app.R"
   workflow_dispatch:
@@ -31,6 +32,7 @@ jobs:
             libgdal-dev \
             libgeos-dev \
             libproj-dev \
+            libudunits2-dev \
             pkg-config \
             proj-bin \
             proj-data
