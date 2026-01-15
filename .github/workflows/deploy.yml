@@ -1,0 +1,59 @@
+name: Deploy Shiny App
+
+on:
+  push:
+    paths:
+      - "data/turc_2026.xlsx"
+      - "renv.lock"
+      - ".github/workflows/deploy.yml"
+      - "src/**"
+      - "app.R"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    env:
+      RSCONNECT_USER: ${{ secrets.RSCONNECT_USER }}
+      RSCONNECT_TOKEN: ${{ secrets.RSCONNECT_TOKEN }}
+      RSCONNECT_SECRET: ${{ secrets.RSCONNECT_SECRET }}
+      RENV_CONFIG_REPOS_OVERRIDE: >-
+        https://packagemanager.posit.co/cran/__linux__/jammy/latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libgdal-dev \
+            libgeos-dev \
+            libproj-dev \
+            libudunits2-dev \
+            pkg-config \
+            proj-bin \
+            proj-data
+
+      - uses: r-lib/actions/setup-renv@v2
+
+      - name: Install rsconnect
+        run: |
+          Rscript -e "renv::install('rsconnect')"
+
+      - name: Deploy to shinyapps.io
+        run: |
+          Rscript - <<'RS'
+          rsconnect::setAccountInfo(
+            name = Sys.getenv("RSCONNECT_USER"),
+            token = Sys.getenv("RSCONNECT_TOKEN"),
+            secret = Sys.getenv("RSCONNECT_SECRET")
+          )
+          rsconnect::deployApp(
+            appDir = ".",
+            appName = "turc_run_2026",
+            forceUpdate = TRUE
+          )
+          RS
